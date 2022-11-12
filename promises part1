@@ -1,0 +1,145 @@
+/*
+console.log('person 1:shows ticket');
+console.log('person 2:shows ticket');
+
+//lets say Husband don't have ticket so makes promise to tc that wife bringing tickets in 3sec
+const promiseWifeBringingTicks= new Promise((resolve,reject)=>{
+  //as wife bringing ticket so have to wait for sec
+  setTimeout(()=>{
+    resolve('ticket');
+  },3000)
+});
+
+//she came with but is hungary so buy her popcorn then only can go inside....so make another promise to bring popcorn once earlier promise of bringing ticket resolves 
+const getPopcorn= promiseWifeBringingTicks.then((t)=>{
+      console.log(`Husband : You got ${t} Now we should go inside`);
+      console.log('wife: no i am hungary get me popcorn first')
+      return new Promise((resolve,reject)=> resolve(`${t} and popcorn`))
+    })
+
+
+    //once getpopcorn promise is resolved..got popcorn......NOw wife says bring me butter as well
+const getbutter=getPopcorn.then((t)=>{
+    console.log(`Husband : You got ${t}, Now we should go inside`);
+    console.log(`Wife: NO i want BUtter as well`);
+    return new Promise((resolve,reject)=>resolve(`${t} , Butter`))
+}) 
+getbutter.then((t)=>console.log(`hey here it is: ${t}`));
+
+
+
+console.log('person 4:shows ticket')
+console.log('person 5:shows ticket') */
+
+
+
+
+//===================Clean all above mess using async await to make it more clear===========================================
+        //to make any function async just put "async" infront of it
+        //async functions always returns a promise...and .then tells when promise returns and what it resolves
+        //await used only inside async body
+        //USE async await WHEN PROMISES are INTERDEPENDABLE
+
+/*console.log('person 1:shows ticket')
+console.log('person 2:shows ticket')
+
+
+const preMovie=async ()=>{
+    const promiseWifeBringingTickets=new Promise((resolve,reject)=>{
+        setTimeout(()=>resolve('tickets'),3000);  //wife bought tickes as per promise after 3s
+    });
+    const getPopcorn= new Promise((resolve,reject)=> resolve(`popcorn`))
+    const addButter= new Promise((resolve,reject)=> resolve(`Butter`))
+
+    let ticket= await promiseWifeBringingTickets;    
+    console.log(`Husband : You got me ${ticket}, Now we should go inside`);
+    console.log('wife: no i am hungary get me popcorn first')
+
+    let popcorn=await getPopcorn;
+    console.log(`Husband : I got ${popcorn} for you. Now let's go inside`);
+    console.log(`wife: No i want Butter as well for ${popcorn}`)
+
+    let butter= await addButter;
+    console.log(`Husband : I got you ${butter}. Now let's go inside.`)
+
+    return ticket;
+}
+
+//first promise of movies after which rest were made
+preMovie().then((m)=>console.log(`Husband shows ${m} to ticket checker`));
+
+
+console.log('person 4:shows ticket')
+console.log('person 5:shows ticket')
+
+*/
+
+
+
+
+//===================USE promise.all WHEN PROMISES are not INTERDEPENDABLE===========================================
+        // all promise resolve Parallel and returns only when all gets resolved
+
+
+        console.log('person 1:shows ticket')
+        console.log('person 2:shows ticket')
+        
+
+        const preMovie=async ()=>{
+            const promiseWifeBringingTickets=new Promise((resolve,reject)=>{
+                setTimeout(()=>resolve('tickets'),3000);  //wife bought tickes as per promise after 3s
+            });
+            const getPopcorn= new Promise((resolve,reject)=> resolve(`popcorn`))
+            const getCandy= new Promise((resolve,reject)=> resolve(`candy`))
+            const getCoke= new Promise((resolve,reject)=> resolve(`coke`))
+            let ticket= await promiseWifeBringingTickets;   
+
+            let [popcorn,candy,coke]= await Promise.all([getPopcorn,getCandy,getCoke])   
+            console.log(`${popcorn},${candy},${coke}`)
+        
+            return ticket;
+        }
+
+        preMovie().then((m)=>console.log(`Husband shows ${m} to ticket checker`));
+
+
+        console.log('person 4:shows ticket')
+        console.log('person 5:shows ticket')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
