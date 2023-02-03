@@ -1,0 +1,15 @@
+1. first install ts compiler to convert ts files into js and run on brwoser similar to js files.    
+To do that run: npm install -g typescript
+
+2. Now run:( to convert ts ts file into  into js file a new created , use that in html file )
+        tsc app.ts  (if error: FullyQualifiedErrorId : UnauthorizedAccess )
+        Resolve error: Open powershell as admin type:  Set-ExecutionPolicy RemoteSigned
+        then [Y] . This will set permissions to execute typescript compiler.
+
+3. MORE CONFIGURATION : initialise/creates init file for tsc (tsconfig.json)
+run : tsc --init
+
+4. 
+ 
+
+
